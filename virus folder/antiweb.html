@@ -1,0 +1,73 @@
+<!DOCTYPE html>  
+<html lang="en">  
+  <head>  
+    <meta charset="utf-8" />  
+    <meta name="viewport" content="width=device-width, initial-scale=1" />  
+    <title>Hello World!</title>  
+    <!-- linking to PyScript assets -->  
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />  
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>  
+  </head>  
+  <body>  
+  <!-- Put Python code inside the the <py-script> tag -->  
+    <py-script>
+        import os
+        from tkinter import Tk
+        from tkinter.filedialog import askopenfilename, askdirectory
+        
+        # List of known virus signatures (for demonstration)
+        virus_signatures = [
+            rb"X5O!P%@AP[4\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*"
+        ]
+        
+        def scan_file(file_path):
+            """
+            Scan a single file for known virus signatures.
+            """
+            try:
+                with open(file_path, "rb") as file:
+                    file_content = file.read()
+                    for signature in virus_signatures:
+                        if signature in file_content:
+                            print(f"Virus found in file: {file_path}")
+                            return
+                    print(f"No virus found in file: {file_path}")
+            except Exception as e:
+                print(f"Error scanning file {file_path}: {e}")
+        
+        def scan_directory(directory_path):
+            """
+            Scan all files in a directory for known virus signatures.
+            """
+            for root, _, files in os.walk(directory_path):
+                for file_name in files:
+                    file_path = os.path.join(root, file_name)
+                    scan_file(file_path)
+        
+        def file_open():
+            """
+            Open a file dialog to select a file or directory to scan.
+            """
+            Tk().withdraw()  # Hide the root window
+            choice = 'd'
+            
+            if choice == 'f':
+                file_path = askopenfilename()  # Open file dialog
+                if file_path:
+                    scan_file(file_path)
+                else:
+                    print("No file selected.")
+            elif choice == 'd':
+                directory_path = askdirectory()  # Open directory dialog
+                if directory_path:
+                    scan_directory(directory_path)
+                else:
+                    print("No directory selected.")
+            else:
+                print("Invalid choice. Please enter 'f' or 'd'.")
+        
+        if __name__ == "__main__":
+            file_open()
+        </py-script>  
+  </body>  
+</html>  
