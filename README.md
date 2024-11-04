@@ -1,2 +1,1 @@
-MINI PROJECT DR. GU POPE COLLEGE OF ENGINEERING
-
+Kingslin, Nantha Kumar, Sathish Kumar, and Shamsher Kumar, students from Dr. G.U. Pope College of Engineering, have collaborated on a mini-project titled "Virus Shield." This project showcases their technical skills and innovative thinking as they apply their theoretical knowledge to practical solutions.
